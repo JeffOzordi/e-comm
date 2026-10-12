@@ -1,8 +1,11 @@
+
 import { useEffect, useState } from 'react';
 import { Moon, Sun } from 'lucide-react';
 
 const ThemeToggle = () => {
-  const [isDark, setIsDark] = useState(false);
+  const [isDark, setIsDark] = useState(() => {
+    return localStorage.getItem('theme') !== 'light';
+  });
 
   useEffect(() => {
     document.documentElement.classList.toggle('dark', isDark);
@@ -12,10 +15,8 @@ const ThemeToggle = () => {
   return (
     <button
       onClick={() => setIsDark(!isDark)}
-      className="rounded-full p-2 shadow-md shadow-purple-400 
-      text-gray-600 hover:text-purple-400 transition-all 
-      ease-in-out cursor-pointer dark:shadow-amber-400 
-      dark:hover:text-amber-400"
+      aria-label="Toggle theme"
+      className="cursor-pointer rounded-full p-2 shadow-md shadow-purple-400 transition-all ease-in-out hover:text-purple-400 dark:shadow-amber-400 dark:hover:text-amber-400"
     >
       {isDark ? <Sun size={20} /> : <Moon size={20} />}
     </button>
