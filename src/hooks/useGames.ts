@@ -16,6 +16,7 @@ export interface Product {
   rating: number
   price: number
   category: string
+  description: string
 }
 
 const useGames = () => {

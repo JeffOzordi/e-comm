@@ -8,7 +8,7 @@ const ProductGrid = () => {
   return (
     <>
       {error && <Error message={error} />}
-      <div className="grid grid-cols-[repeat(auto-fill,minmax(280px,1fr))] gap-5 p-3 justify-items-center">
+      <div className="grid grid-cols-[repeat(auto-fill,minmax(300px,1fr))] gap-x-1 gap-y-4 p-3 justify-items-center">
         {products.map((product) => (
           <ProductCard key={product.id} product={product}/>
         ))}

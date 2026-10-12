@@ -6,3 +6,16 @@
 html, body, #root {
     height: 100%;
 }
+
+.p-1{
+    padding: .25rem;
+}
+.p-2{
+    padding: .5rem;
+}
+.p-4{
+    padding: 1rem;
+}
+.p-6{
+    padding: 1.25rem;
+}
