@@ -13,6 +13,9 @@ export interface Product {
   id: number;
   title: string;
   thumbnail: string
+  rating: number
+  price: number
+  category: string
 }
 
 const useGames = () => {
