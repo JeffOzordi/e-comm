@@ -3,13 +3,17 @@ import ProductGrid from './components/ProductGrid';
 
 function App() {
   return (
-    <div className="bg-white text-black dark:bg-gray-800 dark:text-white min-h-screen">
+    <div className="min-h-screen bg-white text-black dark:bg-black dark:text-white">
       <NavBar />
-      <div className="grid sm:grid-cols-2">
-        <div className="hidden sm:block">aside</div>
-        <div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-[240px_1fr]">
+        <aside className="hidden lg:block">
+          aside
+        </aside>
+
+        <main>
           <ProductGrid />
-        </div>
+        </main>
       </div>
     </div>
   );

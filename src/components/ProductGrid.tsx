@@ -1,5 +1,6 @@
 import useGames from '../hooks/useGames';
 import Error from './Error';
+import ProductCard from './ProductCard';
 
 const ProductGrid = () => {
   const { products, error } = useGames();
@@ -7,11 +8,11 @@ const ProductGrid = () => {
   return (
     <>
       {error && <Error message={error} />}
-      <ul>
+      <div className="grid grid-cols-[repeat(auto-fill,minmax(280px,1fr))] gap-5 p-3 justify-items-center">
         {products.map((product) => (
-          <li key={product.id}>{product.title}</li>
+          <ProductCard key={product.id} product={product}/>
         ))}
-      </ul>
+      </div>
     </>
   );
 };
