@@ -3,7 +3,7 @@ import NavBar from './components/NavBar';
 function App() {
 
   return (
-    <div className="grid bg-white dark:bg-gray-600">
+    <div className="bg-white dark:bg-gray-800 min-h-screen">
       <NavBar />
       <div className="grid sm:grid-cols-2">
         <div className="hidden sm:block bg-amber-300">aside</div>

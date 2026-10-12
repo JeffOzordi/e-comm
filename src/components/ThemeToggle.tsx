@@ -12,9 +12,10 @@ const ThemeToggle = () => {
   return (
     <button
       onClick={() => setIsDark(!isDark)}
-      className="rounded-full p-2 shadow-md 
-        shadow-purple-400 text-gray-600 hover:text-purple-400 
-        transition-all ease-in-out cursor-pointer"
+      className="rounded-full p-2 shadow-md shadow-purple-400 
+      text-gray-600 hover:text-purple-400 transition-all 
+      ease-in-out cursor-pointer dark:shadow-amber-400 
+      dark:hover:text-amber-400"
     >
       {isDark ? <Sun size={20} /> : <Moon size={20} />}
     </button>
