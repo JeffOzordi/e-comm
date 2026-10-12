@@ -1,13 +1,15 @@
 import NavBar from './components/NavBar';
+import ProductGrid from './components/ProductGrid';
 
 function App() {
-
   return (
-    <div className="bg-white dark:bg-gray-800 min-h-screen">
+    <div className="bg-white text-black dark:bg-gray-800 dark:text-white min-h-screen">
       <NavBar />
       <div className="grid sm:grid-cols-2">
-        <div className="hidden sm:block bg-amber-300">aside</div>
-        <div className="bg-sky-500">main</div>
+        <div className="hidden sm:block">aside</div>
+        <div>
+          <ProductGrid />
+        </div>
       </div>
     </div>
   );
