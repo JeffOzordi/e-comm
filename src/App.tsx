@@ -1,3 +1,4 @@
+import CategoryList from './components/CategoryList';
 import NavBar from './components/NavBar';
 import ProductGrid from './components/ProductGrid';
 
@@ -11,7 +12,9 @@ function App() {
       <NavBar />
 
       <div className="grid grid-cols-1 lg:grid-cols-[240px_1fr]">
-        <aside className="hidden lg:block">aside</aside>
+        <aside className="hidden lg:block">
+          <CategoryList/>
+        </aside>
 
         <main>
           <ProductGrid />
