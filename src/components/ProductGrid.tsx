@@ -1,18 +1,19 @@
-import useGames from '../hooks/useGames';
+import { Box, SimpleGrid } from '@chakra-ui/react';
+import useProducts from '../hooks/useProduct';
 import Error from './Error';
 import ProductCard from './ProductCard';
 
 const ProductGrid = () => {
-  const { products, error } = useGames();
+  const { products, error, isLoading } = useProducts();
 
   return (
     <>
       {error && <Error message={error} />}
-      <div className="grid grid-cols-[repeat(auto-fill,minmax(300px,1fr))] gap-x-1 gap-y-4 p-3 justify-items-center">
+      <SimpleGrid padding={3} columns={{ sm: 1, md: 3, }}  gap={5} className='justify-items-center'>
         {products.map((product) => (
           <ProductCard key={product.id} product={product}/>
         ))}
-      </div>
+      </SimpleGrid>
     </>
   );
 };

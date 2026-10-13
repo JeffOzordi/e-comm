@@ -1,5 +1,3 @@
-import React from 'react';
-import { Message } from '../../node_modules/typescript/vendor/vscode-jsonrpc/lib/common/messages';
 
 interface Props {
   message: string;
