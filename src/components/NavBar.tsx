@@ -4,7 +4,7 @@ import ThemeToggle from './ThemeToggle';
 const NavBar = () => {
 
   return (
-    <nav className="flex items-center h-20 justify-between gap-2 p-2">
+    <nav className="flex items-center h-20 justify-between gap-">
       <img src={logo} className="w-12 h-12 rounded-2xl" />
       <ThemeToggle/>
     </nav>

@@ -3,9 +3,14 @@ import useProducts from '../hooks/useProduct';
 import Error from './Error';
 import ProductCard from './ProductCard';
 import ProductCardSkeleton from './ProductCardSkeleton';
+import { Category } from '../hooks/useCategories';
 
-const ProductGrid = () => {
-  const { products, error, isLoading } = useProducts();
+interface Props {
+  selectedCategory: Category | null
+}
+
+const ProductGrid = ( { selectedCategory }: Props ) => {
+  const { products, error, isLoading } = useProducts(selectedCategory);
   const Skeletons = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
   return (

@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
-import { CanceledError } from 'axios';
-import apiClient from '../services/api-client';
+import { AxiosRequestConfig, CanceledError } from 'axios';
+import apiClient from   '../services/api-client';
+import { Category } from './useCategories';
 
-const useData = <T>(endpoint: string) => {
+const useData = <T>(endpoint: string, selectedCategory?: Category | null) => {
   const [data, setData] = useState<T | null>(null);
   const [error, setError] = useState('');
   const [isLoading, setLoading] = useState(false);
@@ -13,8 +14,9 @@ const useData = <T>(endpoint: string) => {
     setLoading(true);
 
     apiClient
-      .get<T>(endpoint, { signal: controller.signal })
+      .get<T>(selectedCategory ? selectedCategory.url : endpoint, { signal: controller.signal })
       .then((res) => {
+        console.log(selectedCategory?.url)
         setData(res.data);
         setLoading(false);
       })
@@ -30,7 +32,7 @@ const useData = <T>(endpoint: string) => {
       });
 
     return () => controller.abort();
-  }, [endpoint]);
+  }, [endpoint, selectedCategory]);
 
   return { data, error, isLoading };
 };

@@ -1,3 +1,4 @@
+import { Category } from './useCategories';
 import useData from './useData';
 
 export interface FetchProductsResponse {
@@ -18,9 +19,9 @@ export interface Product {
   images: string[];
 }
 
-const useProducts = () => {
+const useProducts = (selectedCategory?: Category | null) => {
   const { data, error, isLoading} 
-  = useData<FetchProductsResponse>('/products');
+  = useData<FetchProductsResponse>('/products', selectedCategory);
 
   const products = data?.products ?? [];
 
