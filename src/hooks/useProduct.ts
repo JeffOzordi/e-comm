@@ -1,6 +1,4 @@
-import { useState, useEffect } from 'react';
-import apiClient from '../services/api-client';
-import { CanceledError } from 'axios';
+import useData from './useData';
 
 export interface FetchProductsResponse {
   products: Product[];
@@ -20,33 +18,11 @@ export interface Product {
   images: string[];
 }
 
-export interface Image {
-  image: string;
-}
-
 const useProducts = () => {
-  const [products, setProducts] = useState<Product[]>([]);
-  const [error, setError] = useState('');
-  const [isLoading, setLoading] = useState(false);
+  const { data, error, isLoading} 
+  = useData<FetchProductsResponse>('/products');
 
-  useEffect(() => {
-    const controller = new AbortController();
-
-    setLoading(true);
-    apiClient
-      .get<FetchProductsResponse>('/products', { signal: controller.signal })
-      .then((res) => {
-        setLoading(false);
-        setProducts(res.data.products);
-      })
-      .catch((err) => {
-        if (err instanceof CanceledError) return;
-        setLoading(false);
-        setError(err.message);
-      });
-
-    return () => controller.abort();
-  }, []);
+  const products = data?.products ?? [];
 
   return { products, error, isLoading };
 };

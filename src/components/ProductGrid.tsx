@@ -14,7 +14,7 @@ const ProductGrid = () => {
       <SimpleGrid
         padding={3}
         columns={{ sm: 1, md: 2, lg: 3, xl:4 }}
-        gap={5}
+        gap={3}
         className="justify-items-center"
       >
         {isLoading &&
