@@ -4,9 +4,15 @@ import NavBar from './components/NavBar';
 import ProductGrid from './components/ProductGrid';
 import { useState } from 'react';
 import { Category } from './hooks/useCategories';
+import SortSelector from './components/SortSelector';
+
+export interface ProductQuery {
+  category?: Category;
+  sortOrder?: string;
+}
 
 function App() {
-  const [selectedCategory, setSelectedCategory] = useState<Category | null>(null)
+  const [productQuery, setProductQuery] = useState<ProductQuery>({});
 
   return (
     <div
@@ -18,11 +24,22 @@ function App() {
 
       <div className="grid grid-cols-1 lg:grid-cols-[200px_1fr]">
         <Box padding={3} className="hidden lg:block">
-          <CategoryList selectedCategory={selectedCategory} onSelectCategory={(category) => setSelectedCategory(category)}/>
+          <CategoryList
+            selectedCategory={productQuery.category}
+            onSelectCategory={(category) =>
+              setProductQuery((prev) => ({ ...prev, category }))
+            }
+          />
         </Box>
 
         <main>
-          <ProductGrid selectedCategory={selectedCategory} />
+          <SortSelector
+          selectedSortOrder={productQuery.sortOrder}
+            onSelectSortOrder={(sortOrder) =>
+              setProductQuery((prev) => ({ ...prev, sortOrder }))
+            }
+          />
+          <ProductGrid productQuery={productQuery} />
         </main>
       </div>
     </div>
