@@ -6,6 +6,7 @@ import { useState } from 'react';
 import { Category } from './hooks/useCategories';
 import SortSelector from './components/SortSelector';
 import SortTypeSelector from './components/SortTypeSelector';
+import ProductHeading from './components/ProductHeading';
 
 export interface ProductQuery {
   category?: Category;
@@ -39,6 +40,7 @@ function App() {
         </Box>
 
         <main>
+          <ProductHeading productQuery={productQuery} />
           <HStack>
             <SortSelector
               selectedSortOrder={productQuery.sortOrder}
