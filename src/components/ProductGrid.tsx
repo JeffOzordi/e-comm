@@ -17,9 +17,9 @@ const ProductGrid = ( { selectedCategory }: Props ) => {
     <>
       {error && <Error message={error} />}
       <SimpleGrid
-        padding={3}
+        padding={2}
         columns={{ sm: 1, md: 2, lg: 3, xl:4 }}
-        gap={3}
+        gap={1}
         className="justify-items-center"
       >
         {isLoading &&

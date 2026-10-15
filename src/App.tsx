@@ -13,13 +13,13 @@ function App() {
       className="min-h-screen 
       min-w-screen
     bg-white text-black 
-    dark:bg-black dark:text-white p-2"
+    dark:bg-black dark:text-white"
     >
       <NavBar />
 
       <div className="grid grid-cols-1 lg:grid-cols-[200px_1fr]">
         <Box padding={3} className="hidden lg:block">
-          <CategoryList onSelectCategory={(category) => setSelectedCategory(category)}/>
+          <CategoryList selectedCategory={selectedCategory} onSelectCategory={(category) => setSelectedCategory(category)}/>
         </Box>
 
         <main>

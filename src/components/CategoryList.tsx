@@ -4,9 +4,10 @@ import { Category } from './../hooks/useCategories';
 
 interface Props {
   onSelectCategory: ( category : Category) => void
+  selectedCategory: Category | null
 }
 
-const CategoryList = ({ onSelectCategory }: Props) => {
+const CategoryList = ({ selectedCategory, onSelectCategory }: Props) => {
   const { categories, error, isLoading } = useCategories();
 
   if (isLoading) return <Spinner/>;
@@ -18,7 +19,7 @@ const CategoryList = ({ onSelectCategory }: Props) => {
       {categories?.map((category) => (
         <ListItem listStyle={'none'} key={category.slug}>
           <HStack padding={2}>
-            <Text onClick={() => onSelectCategory(category)} fontSize={'lg'} className='cursor-pointer hover:underline transition-all ease-in-out'>{category.name}</Text>
+            <Text textDecoration={category.slug === selectedCategory?.slug ? 'underline' : ''} color={category.slug === selectedCategory?.slug ? 'orange.700' : ''} fontWeight={category.slug === selectedCategory?.slug ? 'bold' : 'normal'} onClick={() => onSelectCategory(category)} fontSize={'lg'} className='cursor-pointer hover:underline transition-all ease-in-out'>{category.name}</Text>
           </HStack>
         </ListItem>
       ))}
