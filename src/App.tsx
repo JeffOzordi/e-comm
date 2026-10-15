@@ -1,14 +1,16 @@
-import { Box } from '@chakra-ui/react';
+import { Box, HStack } from '@chakra-ui/react';
 import CategoryList from './components/CategoryList';
 import NavBar from './components/NavBar';
 import ProductGrid from './components/ProductGrid';
 import { useState } from 'react';
 import { Category } from './hooks/useCategories';
 import SortSelector from './components/SortSelector';
+import SortTypeSelector from './components/SortTypeSelector';
 
 export interface ProductQuery {
   category?: Category;
   sortOrder?: string;
+  sortType?: string;
 }
 
 function App() {
@@ -33,12 +35,20 @@ function App() {
         </Box>
 
         <main>
-          <SortSelector
-          selectedSortOrder={productQuery.sortOrder}
-            onSelectSortOrder={(sortOrder) =>
-              setProductQuery((prev) => ({ ...prev, sortOrder }))
-            }
-          />
+          <HStack>
+            <SortSelector
+              selectedSortOrder={productQuery.sortOrder}
+              onSelectSortOrder={(sortOrder) =>
+                setProductQuery((prev) => ({ ...prev, sortOrder }))
+              }
+            />
+            <SortTypeSelector
+              onSelectSortType={(sortType) =>
+                setProductQuery((prev) => ({ ...prev, sortType }))
+              }
+              selectedSortType={productQuery.sortType}
+            />
+          </HStack>
           <ProductGrid productQuery={productQuery} />
         </main>
       </div>

@@ -1,8 +1,7 @@
-import { useState, useEffect } from 'react';
-import { AxiosRequestConfig, CanceledError } from 'axios';
-import apiClient from '../services/api-client';
-import { Category } from './useCategories';
+import { CanceledError } from 'axios';
+import { useEffect, useState } from 'react';
 import { ProductQuery } from '../App';
+import apiClient from '../services/api-client';
 
 const useData = <T>(endpoint: string, productQuery?: ProductQuery | null) => {
   const [data, setData] = useState<T | null>(null);
@@ -13,7 +12,7 @@ const useData = <T>(endpoint: string, productQuery?: ProductQuery | null) => {
     const controller = new AbortController();
 
     const searchParams = productQuery?.sortOrder
-      ? `?sortBy=${productQuery.sortOrder}&order=desc`
+      ? `?sortBy=${productQuery.sortOrder}&order=${productQuery.sortType ?? 'asc'}`
       : '';
 
     const requestUrl = productQuery?.category?.url
@@ -28,7 +27,6 @@ const useData = <T>(endpoint: string, productQuery?: ProductQuery | null) => {
         signal: controller.signal,
       })
       .then((res) => {
-        console.log(res.data);
         setData(res.data);
         setLoading(false);
       })
@@ -42,7 +40,12 @@ const useData = <T>(endpoint: string, productQuery?: ProductQuery | null) => {
       });
 
     return () => controller.abort();
-  }, [endpoint, productQuery?.category?.url, productQuery?.sortOrder]);
+  }, [
+    endpoint,
+    productQuery?.category?.url,
+    productQuery?.sortOrder,
+    productQuery?.sortType,
+  ]);
 
   return { data, error, isLoading };
 };

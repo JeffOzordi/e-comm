@@ -36,6 +36,7 @@ const SortSelector = ({ onSelectSortOrder, selectedSortOrder }: Props) => {
                 >
                   {order.label}
                 </MenuItem>
+                
               ))}
             </Menu.Content>
           </Menu.Positioner>
