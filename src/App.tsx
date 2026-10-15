@@ -11,7 +11,6 @@ function App() {
   return (
     <div
       className="min-h-screen 
-      min-w-screen
     bg-white text-black 
     dark:bg-black dark:text-white"
     >
