@@ -14,12 +14,14 @@ const SortSelector = ({ onSelectSortOrder, selectedSortOrder }: Props) => {
     { value: 'discountPercentage', label: 'Discount' },
     { value: 'shippingInformation', label: 'Shipment speed' },
   ];
+
+  const currentSortOrder = sortOrders.find(order => order.value === selectedSortOrder)
   return (
     <Box marginLeft={4} marginBottom={2}>
       <Menu.Root>
         <Menu.Trigger>
           <Button variant="outline">
-            Order by:  { selectedSortOrder ? selectedSortOrder : 'Relevance'}
+            Order by:  { currentSortOrder?.label || 'Relavance' }
             <LuChevronDown />
           </Button>
         </Menu.Trigger>
