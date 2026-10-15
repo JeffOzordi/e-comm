@@ -11,14 +11,20 @@ const useData = <T>(endpoint: string, productQuery?: ProductQuery | null) => {
   useEffect(() => {
     const controller = new AbortController();
 
-    const searchParams = productQuery?.sortOrder
+    const searchParams = productQuery?.searchText
+      ? `/products/search?q=${encodeURIComponent(productQuery.searchText)}`
+      : '';
+
+    const sortParams = productQuery?.sortOrder
       ? `?sortBy=${productQuery.sortOrder}&order=${productQuery.sortType ?? 'asc'}`
       : '';
 
-    const requestUrl = productQuery?.category?.url
-      ? productQuery.category.url.replace('https://dummyjson.com', '') +
-        searchParams
-      : `${endpoint}${searchParams}`;
+    const requestUrl = productQuery?.searchText
+      ? searchParams + sortParams
+      : productQuery?.category?.url
+        ? productQuery.category.url.replace('https://dummyjson.com', '') +
+          sortParams
+        : `${endpoint}${sortParams}`;
 
     setLoading(true);
 
@@ -45,6 +51,7 @@ const useData = <T>(endpoint: string, productQuery?: ProductQuery | null) => {
     productQuery?.category?.url,
     productQuery?.sortOrder,
     productQuery?.sortType,
+    productQuery?.searchText,
   ]);
 
   return { data, error, isLoading };

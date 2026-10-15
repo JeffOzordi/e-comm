@@ -11,18 +11,22 @@ export interface ProductQuery {
   category?: Category;
   sortOrder?: string;
   sortType?: string;
+  searchText?: string;
 }
 
 function App() {
   const [productQuery, setProductQuery] = useState<ProductQuery>({});
-
   return (
     <div
       className="min-h-screen 
     bg-white text-black 
     dark:bg-black dark:text-white"
     >
-      <NavBar />
+      <NavBar
+        onSearch={(searchText) =>
+          setProductQuery((prev) => ({ ...prev, searchText }))
+        }
+      />
 
       <div className="grid grid-cols-1 lg:grid-cols-[200px_1fr]">
         <Box padding={3} className="hidden lg:block">
