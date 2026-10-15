@@ -38,9 +38,9 @@ const ProductCard = ({ product }: Props) => {
           </Box>
         </HStack>
         <Heading fontSize={'large'}>{product.title}</Heading>
-        <Text fontWeight={'medium'} className="font-semibold">
-          ${product.price}
-        </Text>
+          <Text fontWeight={'medium'} className="font-semibold">
+            ${product.price}
+          </Text>
       </Box>
     </Box>
   );
