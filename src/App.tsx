@@ -1,8 +1,8 @@
-import { Box, HStack } from '@chakra-ui/react';
+import { Box, Heading, HStack } from '@chakra-ui/react';
+import { useState } from 'react';
 import CategoryList from './components/CategoryList';
 import NavBar from './components/NavBar';
 import ProductGrid from './components/ProductGrid';
-import { useState } from 'react';
 import { Category } from './hooks/useCategories';
 import SortSelector from './components/SortSelector';
 import SortTypeSelector from './components/SortTypeSelector';
@@ -17,30 +17,75 @@ export interface ProductQuery {
 
 function App() {
   const [productQuery, setProductQuery] = useState<ProductQuery>({});
+  const [isCategoryMenuOpen, setCategoryMenuOpen] = useState(false);
+
+  const handleSelectCategory = (category: Category) => {
+    setProductQuery((prev) => ({ ...prev, category }));
+    setCategoryMenuOpen(false);
+  };
+
   return (
     <div
-      className="min-h-screen 
-    bg-white text-black 
-    dark:bg-black dark:text-white"
+      className="min-h-screen
+      bg-white text-black
+      dark:bg-black dark:text-white"
     >
       <NavBar
         onSearch={(searchText) =>
           setProductQuery((prev) => ({ ...prev, searchText }))
         }
+        onMenuClick={() => setCategoryMenuOpen(true)}
       />
 
+      {/* Mobile/tablet category side panel */}
+      {isCategoryMenuOpen && (
+        <div className="lg:hidden">
+          <button
+            type="button"
+            aria-label="Close category menu"
+            className="fixed inset-0 z-40 cursor-default bg-black/50"
+            onClick={() => setCategoryMenuOpen(false)}
+          />
+
+          <aside
+            className="fixed inset-y-0 left-0 z-50
+            w-72 max-w-[85vw] overflow-y-auto
+            border-r border-gray-200 bg-white p-4
+            dark:border-gray-800 dark:bg-black"
+          >
+            <div className="mb-4 flex items-center justify-between">
+              <Heading fontSize={'2xl'}>Categories</Heading>
+
+              <button
+                type="button"
+                aria-label="Close category menu"
+                onClick={() => setCategoryMenuOpen(false)}
+                className="rounded-lg px-3 py-2 hover:bg-gray-100 dark:hover:bg-gray-800"
+              >
+                ✕
+              </button>
+            </div>
+
+            <CategoryList
+              selectedCategory={productQuery.category}
+              onSelectCategory={handleSelectCategory}
+            />
+          </aside>
+        </div>
+      )}
+
       <div className="grid grid-cols-1 lg:grid-cols-[200px_1fr]">
+        {/* Permanent sidebar on large screens */}
         <Box padding={3} className="hidden lg:block">
           <CategoryList
             selectedCategory={productQuery.category}
-            onSelectCategory={(category) =>
-              setProductQuery((prev) => ({ ...prev, category }))
-            }
+            onSelectCategory={handleSelectCategory}
           />
         </Box>
 
-        <Box marginY={1} borderTopLeftRadius={30} className='bg-gray-100 dark:bg-gray-800'>
+        <main className="min-w-0">
           <ProductHeading productQuery={productQuery} />
+
           <HStack>
             <SortSelector
               selectedSortOrder={productQuery.sortOrder}
@@ -48,6 +93,7 @@ function App() {
                 setProductQuery((prev) => ({ ...prev, sortOrder }))
               }
             />
+
             <SortTypeSelector
               onSelectSortType={(sortType) =>
                 setProductQuery((prev) => ({ ...prev, sortType }))
@@ -55,8 +101,9 @@ function App() {
               selectedSortType={productQuery.sortType}
             />
           </HStack>
+
           <ProductGrid productQuery={productQuery} />
-        </Box>
+        </main>
       </div>
     </div>
   );

@@ -22,7 +22,6 @@ const CategoryList = ({ selectedCategory, onSelectCategory }: Props) => {
   if (error) return;
   return (
     <ListRoot>
-      <Heading fontSize={'2xl'}>Categories</Heading>
       {categories?.map((category) => (
         <ListItem listStyle={'none'} key={category.slug}>
           <HStack padding={2}>

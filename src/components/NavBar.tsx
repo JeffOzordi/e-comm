@@ -1,19 +1,39 @@
+
 import { Box } from '@chakra-ui/react';
+import { Menu } from 'lucide-react';
 import logo from '../assets/244396834_683283099297966_5993122135789503446_n.jpg';
 import ThemeToggle from './ThemeToggle';
 import SearchInput from './SearchInput';
 
 interface Props {
-    onSearch : (searchText: string) => void
+  onSearch: (searchText: string) => void;
+  onMenuClick: () => void;
 }
 
-const NavBar = ({ onSearch }: Props) => {
-
+const NavBar = ({ onSearch, onMenuClick }: Props) => {
   return (
-    <Box paddingX={2} className="flex items-center h-20 gap-2">
-      <img src={logo} className="w-12 h-12 rounded-2xl" />
-      <SearchInput onSearch={onSearch}/>
-      <ThemeToggle/>
+    <Box
+      paddingX={2}
+      className="flex h-20 items-center gap-2"
+    >
+      <button
+        type="button"
+        aria-label="Open category menu"
+        onClick={onMenuClick}
+        className="shrink-0 rounded-lg p-2 hover:bg-gray-100 dark:hover:bg-gray-800 lg:hidden"
+      >
+        <Menu size={24} />
+      </button>
+
+      <img
+        src={logo}
+        alt="Store logo"
+        className="h-12 w-12 shrink-0 rounded-2xl"
+      />
+
+      <SearchInput onSearch={onSearch} />
+
+      <ThemeToggle />
     </Box>
   );
 };
