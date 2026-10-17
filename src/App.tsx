@@ -26,7 +26,7 @@ function App() {
 
   return (
     <div
-      className="min-h-screen
+      className="h-screen overflow-hidden
       bg-white text-black
       dark:bg-black dark:text-white"
     >
@@ -49,7 +49,7 @@ function App() {
 
           <aside
             className="fixed inset-y-0 left-0 z-50
-            w-72 max-w-[85vw] overflow-y-auto
+            w-72 max-w-[85vw] overflow-y-auto hide-scrollbar
             border-r border-gray-200 bg-white p-4
             dark:border-gray-800 dark:bg-black"
           >
@@ -74,16 +74,23 @@ function App() {
         </div>
       )}
 
-      <div className="grid grid-cols-1 lg:grid-cols-[200px_1fr]">
+      <div className="grid h-[calc(100vh-70px)] grid-cols-1 lg:grid-cols-[200px_minmax(0,1fr)]">
         {/* Permanent sidebar on large screens */}
-        <Box padding={3} className="hidden lg:block">
+        <Box
+          padding={3}
+          className="hidden lg:block h-full overflow-y-auto hide-scrollbar"
+        >
           <CategoryList
             selectedCategory={productQuery.category}
             onSelectCategory={handleSelectCategory}
           />
         </Box>
 
-        <Box marginY={1} borderTopLeftRadius={30} className='bg-gray-100 dark:bg-gray-900 min-w-0'>
+        <Box
+          marginY={1}
+          borderTopLeftRadius={30}
+          className="h-full min-w-0 overflow-y-auto bg-gray-100 dark:bg-gray-900 hide-scrollbar"
+        >
           <ProductHeading productQuery={productQuery} />
 
           <HStack>

@@ -11,7 +11,7 @@ interface Props {
 
 const ProductGrid = ({ productQuery }: Props) => {
   const { data: products, error, isLoading } = useProducts(productQuery);
-  const Skeletons = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+  const Skeletons = [1, 2, 3, 4, 5, 6, 7, 8];
 
   if (error) return <Error message={error.message} />;
 

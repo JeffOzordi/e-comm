@@ -19,3 +19,15 @@ html, body, #root {
 .p-6{
     padding: 1.25rem;
 }
+
+
+/* Hide scrollbar but keep scrolling functional */
+.hide-scrollbar {
+  -ms-overflow-style: none; /* Internet Explorer and Edge Legacy */
+  scrollbar-width: none; /* Firefox */
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, and newer Chromium browsers */
+}
+    
