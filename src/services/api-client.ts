@@ -1,5 +1,21 @@
-import axios from 'axios'
+import axios, { AxiosRequestConfig } from 'axios'
 
-export default axios.create({
+const  axiosInstance = axios.create({
     baseURL: 'https://dummyjson.com'
 })
+
+class APIClient<T> {
+    endpoint: string;
+
+    constructor(endpoint: string) {
+        this.endpoint = endpoint
+    }
+
+    getAll = (config: AxiosRequestConfig) => {
+        return axiosInstance
+            .get<T>(this.endpoint, config)
+            .then(res => res.data)
+    }
+}
+
+export default APIClient
