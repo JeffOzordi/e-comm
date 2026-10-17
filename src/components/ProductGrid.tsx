@@ -1,4 +1,5 @@
-import { Button, SimpleGrid } from '@chakra-ui/react';
+import { Box, SimpleGrid } from '@chakra-ui/react';
+import InfiniteScroll from 'react-infinite-scroll-component';
 import { ProductQuery } from '../App';
 import useProducts from '../hooks/useProduct';
 import Error from './Error';
@@ -24,30 +25,44 @@ const ProductGrid = ({ productQuery }: Props) => {
 
   if (error) return <Error message={error.message} />;
 
+  const fethcProductCount =
+    data?.pages.reduce((total, page) => total + page.products.length, 0) || 0;
+
   return (
-    <>
-      <SimpleGrid
-        padding={3}
-        columns={{ sm: 1, md: 2, lg: 3, xl: 4 }}
-        gap={1}
-        className="justify-items-center"
+    <Box>
+      <InfiniteScroll
+        dataLength={fethcProductCount}
+        hasMore={!!hasNextPage}
+        next={() => fetchNextPage()}
+        loader={
+          <SimpleGrid
+            padding={3}
+            columns={{ sm: 1, md: 2, lg: 3, xl: 4 }}
+            gap={1}
+            className="justify-items-center"
+          >
+            {isLoading &&
+              Skeletons.map((skeleton) => (
+                <ProductCardSkeleton key={skeleton} />
+              ))}
+          </SimpleGrid>
+        }
+        scrollableTarget="scrollableDiv"
       >
-        {isLoading &&
-          Skeletons.map((skeleton) => <ProductCardSkeleton key={skeleton} />)}
-        {products?.map((product) => (
-          <ProductCard key={product.id} product={product} />
-        ))}
-      </SimpleGrid>
-      {hasNextPage && (
-        <Button
-          margin={5}
-          onClick={() => fetchNextPage()}
-          disabled={isFetchingNextPage}
+        <SimpleGrid
+          padding={3}
+          columns={{ sm: 1, md: 2, lg: 3, xl: 4 }}
+          gap={1}
+          className="justify-items-center"
         >
-          {isFetchingNextPage ? 'Loading...' : 'Load More'}
-        </Button>
-      )}
-    </>
+          {isLoading &&
+            Skeletons.map((skeleton) => <ProductCardSkeleton key={skeleton} />)}
+          {products?.map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))}
+        </SimpleGrid>
+      </InfiniteScroll>
+    </Box>
   );
 };
 

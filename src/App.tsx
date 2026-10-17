@@ -86,7 +86,7 @@ function App() {
           />
         </Box>
 
-        <Box
+        <Box id="scrollableDiv"
           marginY={1}
           borderTopLeftRadius={30}
           className="h-full min-w-0 overflow-y-auto bg-gray-100 dark:bg-gray-900 hide-scrollbar"

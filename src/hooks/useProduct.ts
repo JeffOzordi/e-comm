@@ -60,6 +60,7 @@ const useProducts = (productQuery: ProductQuery) =>
         ? nextSkip
         : undefined;
     },
+    staleTime: 24 * 60 * 60 * 1000 //24hrs
   });
 
 export default useProducts;
