@@ -17,15 +17,15 @@ const SortSelector = ({ onSelectSortOrder, selectedSortOrder }: Props) => {
 
   const currentSortOrder = sortOrders.find(order => order.value === selectedSortOrder)
   return (
-    <Box marginLeft={4} marginBottom={2}>
+    <Box marginLeft={4} marginBottom={2} border={'1px solid'} borderRadius={5} outline={'none'}>
       <Menu.Root>
-        <Menu.Trigger>
+        <Menu.Trigger asChild>
           <Button variant="outline">
             Order by:  { currentSortOrder?.label || 'Relavance' }
             <LuChevronDown />
           </Button>
         </Menu.Trigger>
-        <Portal>
+
           <Menu.Positioner>
             <Menu.Content>
               {sortOrders.map((order) => (
@@ -40,7 +40,6 @@ const SortSelector = ({ onSelectSortOrder, selectedSortOrder }: Props) => {
               ))}
             </Menu.Content>
           </Menu.Positioner>
-        </Portal>
       </Menu.Root>
     </Box>
   );

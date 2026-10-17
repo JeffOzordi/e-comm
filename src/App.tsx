@@ -39,7 +39,7 @@ function App() {
           />
         </Box>
 
-        <main>
+        <Box marginY={1} borderTopLeftRadius={30} className='bg-gray-100 dark:bg-gray-800'>
           <ProductHeading productQuery={productQuery} />
           <HStack>
             <SortSelector
@@ -56,7 +56,7 @@ function App() {
             />
           </HStack>
           <ProductGrid productQuery={productQuery} />
-        </main>
+        </Box>
       </div>
     </div>
   );

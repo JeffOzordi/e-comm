@@ -8,7 +8,7 @@ const ProductCardSkeleton = () => {
         height="300px"
         width="100%"
         borderRadius="24px"
-        className="bg-gray-200 dark:bg-gray-800"
+        className="bg-gray-200 dark:bg-gray-900"
       />
 
       {/* Product information placeholders */}
