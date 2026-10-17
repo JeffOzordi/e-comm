@@ -15,7 +15,7 @@ interface Props {
 }
 
 const CategoryList = ({ selectedCategory, onSelectCategory }: Props) => {
-  const { categories, error, isLoading } = useCategories();
+  const { data: categories, error, isLoading } = useCategories();
 
   if (isLoading) return <Spinner />;
 

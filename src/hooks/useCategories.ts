@@ -1,4 +1,5 @@
-import useData from './useData';
+
+import categories from '../data/categories';
 
 export interface Category {
   slug: string;
@@ -6,18 +7,10 @@ export interface Category {
   url: string;
 }
 
-const useCategories = () => {
-  const {
-    data: categories,
-    error,
-    isLoading
-  } = useData<Category[]>('/products/categories');
-
-  return {
-    categories: categories ?? [],
-    error,
-    isLoading
-  };
-};
+const useCategories = () => ({
+  data: categories,
+  isLoading: false,
+  error: null,
+});
 
 export default useCategories;
