@@ -1,4 +1,5 @@
-import { useQuery } from '@tanstack/react-query';
+
+import { useInfiniteQuery } from '@tanstack/react-query';
 import { ProductQuery } from '../App';
 import APIClient from '../services/api-client';
 
@@ -20,28 +21,44 @@ export interface Product {
   images: string[];
 }
 
+const PAGE_SIZE = 12;
+
 const useProducts = (productQuery: ProductQuery) =>
-  useQuery({
+  useInfiniteQuery({
     queryKey: ['products', productQuery],
-    
-    queryFn: () => {
-      const { category, sortOrder, sortType, searchText } = productQuery;
-      
+
+    initialPageParam: 0,
+
+    queryFn: ({ pageParam }) => {
+      const { category, sortOrder, sortType, searchText } =
+        productQuery;
+
       const endpoint = searchText
-      ? '/products/search'
-      : category
-      ? `/products/category/${category.slug}`
-      : '/products';
-      const apiClient = new APIClient<FetchProductsResponse>(endpoint);
+        ? '/products/search'
+        : category
+        ? `/products/category/${category.slug}`
+        : '/products';
+
+      const apiClient =
+        new APIClient<FetchProductsResponse>(endpoint);
 
       return apiClient.getAll({
         params: {
+          limit: PAGE_SIZE,
+          skip: pageParam,
           ...(searchText ? { q: searchText } : {}),
           ...(sortOrder ? { sortBy: sortOrder } : {}),
           ...(sortType ? { order: sortType } : {}),
         },
-      })
-      .then(res => res.products)
+      });
+    },
+
+    getNextPageParam: (lastPage) => {
+      const nextSkip = lastPage.skip + lastPage.limit;
+
+      return nextSkip < lastPage.total
+        ? nextSkip
+        : undefined;
     },
   });
 
