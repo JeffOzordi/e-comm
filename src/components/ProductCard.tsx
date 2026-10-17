@@ -13,7 +13,7 @@ const ProductCard = ({ product }: Props) => {
         width="100%"
         objectFit="contain"
         src={product.thumbnail}
-        className="min-w-0 rounded-4xl bg-gray-200 dark:bg-gray-900"
+        className="min-w-0 rounded-4xl bg-gray-200 dark:bg-gray-800"
         padding={2}
       />
       <Box paddingX={3} paddingY={1}>

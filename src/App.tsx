@@ -83,7 +83,7 @@ function App() {
           />
         </Box>
 
-        <main className="min-w-0">
+        <Box marginY={1} borderTopLeftRadius={30} className='bg-gray-100 dark:bg-gray-900 min-w-0'>
           <ProductHeading productQuery={productQuery} />
 
           <HStack>
@@ -103,7 +103,7 @@ function App() {
           </HStack>
 
           <ProductGrid productQuery={productQuery} />
-        </main>
+        </Box>
       </div>
     </div>
   );

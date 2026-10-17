@@ -1,6 +1,6 @@
+import { useQuery } from '@tanstack/react-query';
 import { ProductQuery } from '../App';
-import { Category } from './useCategories';
-import useData from './useData';
+import apiClient from '../services/api-client';
 
 export interface FetchProductsResponse {
   products: Product[];
@@ -20,13 +20,29 @@ export interface Product {
   images: string[];
 }
 
-const useProducts = (productQuery: ProductQuery) => {
-  const { data, error, isLoading} 
-  = useData<FetchProductsResponse>('/products', productQuery);
+const useProducts = (productQuery: ProductQuery) => useQuery({
+  queryKey: ['products', productQuery],
+ 
+    queryFn: () => {
+      const { category, sortOrder, sortType, searchText } = productQuery;
 
-  const products = data?.products ?? [];
+      const endpoint = searchText
+        ? '/products/search'
+        : category
+          ? `/products/category/${category.slug}`
+          : '/products';
 
-  return { products, error, isLoading };
-};
+      return apiClient
+        .get<FetchProductsResponse>(endpoint, {
+          params: {
+            ...(searchText ? { q: searchText } : {}),
+            ...(sortOrder ? { sortBy: sortOrder } : {}),
+            ...(sortType ? { order: sortType } : {}),
+          },
+        })
+        .then((res) => res.data.products);
+    },
+
+})
 
 export default useProducts;
