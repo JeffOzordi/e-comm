@@ -6,7 +6,7 @@ const Layout = () => {
   const  setCategoryMenuOpen = useMenuStore(s => s.setCategoryMenuOpen);
   return (
     <>
-        <NavBar onMenuClick={() => setCategoryMenuOpen(false)}/>
+        <NavBar onMenuClick={() => setCategoryMenuOpen(true)}/>
         <Outlet />
     </>
   )
