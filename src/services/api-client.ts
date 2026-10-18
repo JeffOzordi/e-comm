@@ -1,21 +1,25 @@
-import axios, { AxiosRequestConfig } from 'axios'
+import axios, { AxiosRequestConfig } from 'axios';
 
-const  axiosInstance = axios.create({
-    baseURL: 'https://dummyjson.com'
-})
+const axiosInstance = axios.create({
+  baseURL: 'https://dummyjson.com',
+});
 
 class APIClient<T> {
-    endpoint: string;
+  endpoint: string;
 
-    constructor(endpoint: string) {
-        this.endpoint = endpoint
-    }
+  constructor(endpoint: string) {
+    this.endpoint = endpoint;
+  }
 
-    getAll = (config: AxiosRequestConfig) => {
-        return axiosInstance
-            .get<T>(this.endpoint, config)
-            .then(res => res.data)
-    }
+  getAll = (config: AxiosRequestConfig) => {
+    return axiosInstance.get<T>(this.endpoint, config).then((res) => res.data);
+  };
+
+  get = (id: number | string) => {
+    return axiosInstance
+      .get<T>(this.endpoint + '/' + id)
+      .then((res) => res.data);
+  };
 }
 
-export default APIClient
+export default APIClient;
