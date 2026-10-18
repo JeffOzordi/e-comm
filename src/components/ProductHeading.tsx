@@ -1,13 +1,11 @@
 import { Box, Heading } from '@chakra-ui/react';
-import useCategories from '../hooks/useCategories';
-import { ProductQuery } from './../App';
 import useCategory from '../hooks/useCategory';
+import useProductQueryStore from '../store';
 
-interface Props {
-  productQuery: ProductQuery;
-}
-const ProductHeading = ({ productQuery }: Props) => {
-  const category = useCategory(productQuery.categorySlug)
+const ProductHeading = () => {
+  const categorySlug = useProductQueryStore(s => s.productQuery.categorySlug)
+
+  const category = useCategory(categorySlug)
 
   const hasCategory = category
     ? `> ${category?.name}`

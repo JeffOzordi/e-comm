@@ -1,21 +1,17 @@
 import {
-  Heading,
   HStack,
   ListItem,
   ListRoot,
   Spinner,
-  Text,
+  Text
 } from '@chakra-ui/react';
 import useCategories from '../hooks/useCategories';
-import { Category } from './../hooks/useCategories';
+import useProductQueryStore from '../store';
 
-interface Props {
-  onSelectCategory: (category: Category) => void;
-  selectedCategorySlug?: string;
-}
-
-const CategoryList = ({ selectedCategorySlug, onSelectCategory }: Props) => {
+const CategoryList = () => {
   const { data: categories, error, isLoading } = useCategories();
+  const selectedCategorySlug = useProductQueryStore(s => s.productQuery.categorySlug)
+  const setSelectedCategorySlug = useProductQueryStore(s => s.setCategorySlug)
 
   if (isLoading) return <Spinner />;
 
@@ -35,7 +31,7 @@ const CategoryList = ({ selectedCategorySlug, onSelectCategory }: Props) => {
               fontWeight={
                 category.slug === selectedCategorySlug ? 'bold' : 'normal'
               }
-              onClick={() => onSelectCategory(category)}
+              onClick={() => setSelectedCategorySlug(category.slug)}
               fontSize={'lg'}
               className="cursor-pointer hover:underline transition-all ease-in-out"
             >

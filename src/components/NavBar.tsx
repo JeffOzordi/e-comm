@@ -6,11 +6,11 @@ import ThemeToggle from './ThemeToggle';
 import SearchInput from './SearchInput';
 
 interface Props {
-  onSearch: (searchText: string) => void;
+  // onSearch: (searchText: string) => void;
   onMenuClick: () => void;
 }
 
-const NavBar = ({ onSearch, onMenuClick }: Props) => {
+const NavBar = ({ onMenuClick }: Props) => {
   return (
     <Box
       paddingX={2}
@@ -30,9 +30,7 @@ const NavBar = ({ onSearch, onMenuClick }: Props) => {
         alt="Store logo"
         className="h-12 w-12 shrink-0 rounded-2xl"
       />
-
-      <SearchInput onSearch={onSearch} />
-
+      <SearchInput/>
       <ThemeToggle />
     </Box>
   );

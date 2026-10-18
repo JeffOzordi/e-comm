@@ -1,12 +1,8 @@
 import { Menu, Button, Portal, MenuItem, Box } from '@chakra-ui/react';
 import { LuChevronDown } from 'react-icons/lu';
+import useProductQueryStore from '../store';
 
-interface Props {
-  onSelectSortOrder: (sortOrder: string) => void;
-  selectedSortOrder: string | undefined
-}
-
-const SortSelector = ({ onSelectSortOrder, selectedSortOrder }: Props) => {
+const SortSelector = () => {
   const sortOrders = [
     { value: '', label: 'Relevance' },
     { value: 'rating', label: 'Popularity' },
@@ -14,6 +10,8 @@ const SortSelector = ({ onSelectSortOrder, selectedSortOrder }: Props) => {
     { value: 'discountPercentage', label: 'Discount' },
     { value: 'shippingInformation', label: 'Shipment speed' },
   ];
+  const setSelectedSortOrder = useProductQueryStore(s => s.setSortOrder)
+  const selectedSortOrder = useProductQueryStore(s => s.productQuery.sortOrder)
 
   const currentSortOrder = sortOrders.find(order => order.value === selectedSortOrder)
   return (
@@ -30,7 +28,7 @@ const SortSelector = ({ onSelectSortOrder, selectedSortOrder }: Props) => {
             <Menu.Content>
               {sortOrders.map((order) => (
                 <MenuItem
-                  onClick={() => onSelectSortOrder(order.value)}
+                  onClick={() => setSelectedSortOrder(order.value)}
                   key={order.value}
                   value={order.value}
                 >

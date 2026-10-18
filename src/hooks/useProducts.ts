@@ -1,8 +1,7 @@
-
 import { useInfiniteQuery } from '@tanstack/react-query';
-import { ProductQuery } from '../App';
+import ms from 'ms';
 import APIClient from '../services/api-client';
-import ms from 'ms'
+import useProductQueryStore from '../store';
 
 export interface FetchProductsResponse {
   products: Product[];
@@ -24,24 +23,23 @@ export interface Product {
 
 const PAGE_SIZE = 12;
 
-const useProducts = (productQuery: ProductQuery) =>
-  useInfiniteQuery({
+const useProducts = () => {
+  const productQuery = useProductQueryStore((s) => s.productQuery);
+  return useInfiniteQuery({
     queryKey: ['products', productQuery],
 
     initialPageParam: 0,
 
     queryFn: ({ pageParam }) => {
-      const { categorySlug, sortOrder, sortType, searchText } =
-        productQuery;
+      const { categorySlug, sortOrder, sortType, searchText } = productQuery;
 
       const endpoint = searchText
         ? '/products/search'
         : categorySlug
-        ? `/products/category/${categorySlug}`
-        : '/products';
+          ? `/products/category/${categorySlug}`
+          : '/products';
 
-      const apiClient =
-        new APIClient<FetchProductsResponse>(endpoint);
+      const apiClient = new APIClient<FetchProductsResponse>(endpoint);
 
       return apiClient.getAll({
         params: {
@@ -57,11 +55,9 @@ const useProducts = (productQuery: ProductQuery) =>
     getNextPageParam: (lastPage) => {
       const nextSkip = lastPage.skip + lastPage.limit;
 
-      return nextSkip < lastPage.total
-        ? nextSkip
-        : undefined;
+      return nextSkip < lastPage.total ? nextSkip : undefined;
     },
-    staleTime: ms('24h')
+    staleTime: ms('24h'),
   });
-
+};
 export default useProducts;

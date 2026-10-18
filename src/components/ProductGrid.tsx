@@ -1,16 +1,11 @@
 import { Box, SimpleGrid } from '@chakra-ui/react';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import { ProductQuery } from '../App';
 import useProducts from '../hooks/useProducts';
 import Error from './Error';
 import ProductCard from './ProductCard';
 import ProductCardSkeleton from './ProductCardSkeleton';
 
-interface Props {
-  productQuery: ProductQuery;
-}
-
-const ProductGrid = ({ productQuery }: Props) => {
+const ProductGrid = () => {
   const {
     data,
     error,
@@ -18,7 +13,7 @@ const ProductGrid = ({ productQuery }: Props) => {
     hasNextPage,
     isFetchingNextPage,
     fetchNextPage,
-  } = useProducts(productQuery);
+  } = useProducts();
 
   const products = data?.pages.flatMap((page) => page.products) ?? [];
   const Skeletons = [1, 2, 3, 4, 5, 6, 7, 8];
@@ -41,7 +36,7 @@ const ProductGrid = ({ productQuery }: Props) => {
             gap={1}
             className="justify-items-center"
           >
-            {isLoading &&
+            {isFetchingNextPage &&
               Skeletons.map((skeleton) => (
                 <ProductCardSkeleton key={skeleton} />
               ))}

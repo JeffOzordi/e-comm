@@ -1,28 +1,14 @@
-import { Box, Heading, HStack } from '@chakra-ui/react';
-import { useState } from 'react';
+import { Box, CloseButton, Heading, HStack } from '@chakra-ui/react';
 import CategoryList from './components/CategoryList';
 import NavBar from './components/NavBar';
 import ProductGrid from './components/ProductGrid';
-import { Category } from './hooks/useCategories';
+import ProductHeading from './components/ProductHeading';
 import SortSelector from './components/SortSelector';
 import SortTypeSelector from './components/SortTypeSelector';
-import ProductHeading from './components/ProductHeading';
-
-export interface ProductQuery {
-  categorySlug?: string;
-  sortOrder?: string;
-  sortType?: string;
-  searchText?: string;
-}
+import useMenuStore from './menuStore';
 
 function App() {
-  const [productQuery, setProductQuery] = useState<ProductQuery>({});
-  const [isCategoryMenuOpen, setCategoryMenuOpen] = useState(false);
-
-  const handleSelectCategory = (category: Category) => {
-    setProductQuery((prev) => ({ ...prev, categorySlug: category.slug }));
-    setCategoryMenuOpen(false);
-  };
+  const { isCategoryMenuOpen, setCategoryMenuOpen } = useMenuStore();
 
   return (
     <div
@@ -30,12 +16,7 @@ function App() {
       bg-white text-black
       dark:bg-black dark:text-white"
     >
-      <NavBar
-        onSearch={(searchText) =>
-          setProductQuery((prev) => ({ ...prev, searchText }))
-        }
-        onMenuClick={() => setCategoryMenuOpen(true)}
-      />
+      <NavBar onMenuClick={() => setCategoryMenuOpen(true)} />
 
       {/* Mobile/tablet category side panel */}
       {isCategoryMenuOpen && (
@@ -55,21 +36,14 @@ function App() {
           >
             <div className="mb-4 flex items-center justify-between">
               <Heading fontSize={'2xl'}>Categories</Heading>
-
-              <button
-                type="button"
+              <CloseButton
+                size={'sm'}
                 aria-label="Close category menu"
                 onClick={() => setCategoryMenuOpen(false)}
-                className="rounded-lg px-3 py-2 hover:bg-gray-100 dark:hover:bg-gray-800"
-              >
-                ✕
-              </button>
+              />
             </div>
 
-            <CategoryList
-              selectedCategorySlug={productQuery.categorySlug}
-              onSelectCategory={handleSelectCategory}
-            />
+            <CategoryList />
           </aside>
         </div>
       )}
@@ -80,36 +54,27 @@ function App() {
           padding={3}
           className="hidden lg:block h-full overflow-y-auto hide-scrollbar"
         >
-          <CategoryList
-            selectedCategorySlug={productQuery.categorySlug}
-            onSelectCategory={handleSelectCategory}
-          />
+          <CategoryList />
         </Box>
 
-        <Box id="scrollableDiv"
+        <Box
+          id="scrollableDiv"
           marginY={1}
           borderTopLeftRadius={30}
-          className="h-full min-w-0 overflow-y-auto bg-gray-100 dark:bg-gray-900 hide-scrollbar"
+          className="h-full min-w-0 overflow-y-auto bg-gray-100 dark:bg-gray-900 hide-scrollbar text-center lg:text-left"
         >
-          <ProductHeading productQuery={productQuery} />
+          <ProductHeading />
 
-          <HStack>
-            <SortSelector
-              selectedSortOrder={productQuery.sortOrder}
-              onSelectSortOrder={(sortOrder) =>
-                setProductQuery((prev) => ({ ...prev, sortOrder }))
-              }
-            />
+          <HStack
+            justify="center"
+            className="flex-wrap px-2 sm:gap-4 lg:justify-start"
+          >
+            <SortSelector />
 
-            <SortTypeSelector
-              onSelectSortType={(sortType) =>
-                setProductQuery((prev) => ({ ...prev, sortType }))
-              }
-              selectedSortType={productQuery.sortType}
-            />
+            <SortTypeSelector />
           </HStack>
 
-          <ProductGrid productQuery={productQuery} />
+          <ProductGrid />
         </Box>
       </div>
     </div>
