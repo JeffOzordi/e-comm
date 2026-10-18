@@ -2,6 +2,7 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { ProductQuery } from '../App';
 import APIClient from '../services/api-client';
+import ms from 'ms'
 
 export interface FetchProductsResponse {
   products: Product[];
@@ -60,7 +61,7 @@ const useProducts = (productQuery: ProductQuery) =>
         ? nextSkip
         : undefined;
     },
-    staleTime: 24 * 60 * 60 * 1000 //24hrs
+    staleTime: ms('24h')
   });
 
 export default useProducts;
