@@ -1,7 +1,7 @@
 import { Box, SimpleGrid } from '@chakra-ui/react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { ProductQuery } from '../App';
-import useProducts from '../hooks/useProduct';
+import useProducts from '../hooks/useProducts';
 import Error from './Error';
 import ProductCard from './ProductCard';
 import ProductCardSkeleton from './ProductCardSkeleton';

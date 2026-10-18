@@ -1,5 +1,5 @@
 import { Box, Heading, HStack, Image, Text } from '@chakra-ui/react';
-import { Product } from '../hooks/useProduct';
+import { Product } from '../hooks/useProducts';
 
 interface Props {
   product: Product;
@@ -38,9 +38,9 @@ const ProductCard = ({ product }: Props) => {
           </Box>
         </HStack>
         <Heading fontSize={'large'}>{product.title}</Heading>
-          <Text fontWeight={'medium'} className="font-semibold">
-            ${product.price}
-          </Text>
+        <Text fontWeight={'medium'} className="font-semibold">
+          ${product.price}
+        </Text>
       </Box>
     </Box>
   );
