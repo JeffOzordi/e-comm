@@ -1,22 +1,20 @@
-import { Box, CloseButton, Heading, HStack } from '@chakra-ui/react';
-import CategoryList from './components/CategoryList';
-import NavBar from './components/NavBar';
-import ProductGrid from './components/ProductGrid';
-import ProductHeading from './components/ProductHeading';
-import SortSelector from './components/SortSelector';
-import SortTypeSelector from './components/SortTypeSelector';
-import useMenuStore from './menuStore';
+import { Box, CloseButton, HStack, Heading } from '@chakra-ui/react'
+import CategoryList from '../components/CategoryList'
+import NavBar from '../components/NavBar'
+import ProductGrid from '../components/ProductGrid'
+import ProductHeading from '../components/ProductHeading'
+import SortSelector from '../components/SortSelector'
+import SortTypeSelector from '../components/SortTypeSelector'
+import useMenuStore from '../menuStore'
 
-function App() {
+const HomePage = () => {
   const { isCategoryMenuOpen, setCategoryMenuOpen } = useMenuStore();
-
-  return (
+  return ( 
     <div
       className="h-screen overflow-hidden
       bg-white text-black
       dark:bg-black dark:text-white"
     >
-      <NavBar onMenuClick={() => setCategoryMenuOpen(true)} />
 
       {/* Mobile/tablet category side panel */}
       {isCategoryMenuOpen && (
@@ -66,8 +64,7 @@ function App() {
           <ProductHeading />
 
           <HStack
-            justify="center"
-            className="flex-wrap px-2 sm:gap-4 lg:justify-start"
+            className="flex-wrap px-2 sm:justify-center sm:gap-4 lg:justify-start"
           >
             <SortSelector />
 
@@ -78,7 +75,7 @@ function App() {
         </Box>
       </div>
     </div>
-  );
+  )
 }
 
-export default App;
+export default HomePage
