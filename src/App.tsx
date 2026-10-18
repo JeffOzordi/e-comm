@@ -9,7 +9,7 @@ import SortTypeSelector from './components/SortTypeSelector';
 import ProductHeading from './components/ProductHeading';
 
 export interface ProductQuery {
-  category?: Category;
+  categorySlug?: string;
   sortOrder?: string;
   sortType?: string;
   searchText?: string;
@@ -20,7 +20,7 @@ function App() {
   const [isCategoryMenuOpen, setCategoryMenuOpen] = useState(false);
 
   const handleSelectCategory = (category: Category) => {
-    setProductQuery((prev) => ({ ...prev, category }));
+    setProductQuery((prev) => ({ ...prev, categorySlug: category.slug }));
     setCategoryMenuOpen(false);
   };
 
@@ -67,7 +67,7 @@ function App() {
             </div>
 
             <CategoryList
-              selectedCategory={productQuery.category}
+              selectedCategorySlug={productQuery.categorySlug}
               onSelectCategory={handleSelectCategory}
             />
           </aside>
@@ -81,7 +81,7 @@ function App() {
           className="hidden lg:block h-full overflow-y-auto hide-scrollbar"
         >
           <CategoryList
-            selectedCategory={productQuery.category}
+            selectedCategorySlug={productQuery.categorySlug}
             onSelectCategory={handleSelectCategory}
           />
         </Box>

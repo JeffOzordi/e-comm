@@ -30,13 +30,13 @@ const useProducts = (productQuery: ProductQuery) =>
     initialPageParam: 0,
 
     queryFn: ({ pageParam }) => {
-      const { category, sortOrder, sortType, searchText } =
+      const { categorySlug, sortOrder, sortType, searchText } =
         productQuery;
 
       const endpoint = searchText
         ? '/products/search'
-        : category
-        ? `/products/category/${category.slug}`
+        : categorySlug
+        ? `/products/category/${categorySlug}`
         : '/products';
 
       const apiClient =

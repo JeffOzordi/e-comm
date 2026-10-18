@@ -11,10 +11,10 @@ import { Category } from './../hooks/useCategories';
 
 interface Props {
   onSelectCategory: (category: Category) => void;
-  selectedCategory: Category | undefined;
+  selectedCategorySlug?: string;
 }
 
-const CategoryList = ({ selectedCategory, onSelectCategory }: Props) => {
+const CategoryList = ({ selectedCategorySlug, onSelectCategory }: Props) => {
   const { data: categories, error, isLoading } = useCategories();
 
   if (isLoading) return <Spinner />;
@@ -27,13 +27,13 @@ const CategoryList = ({ selectedCategory, onSelectCategory }: Props) => {
           <HStack padding={2}>
             <Text
               textDecoration={
-                category.slug === selectedCategory?.slug ? 'underline' : ''
+                category.slug === selectedCategorySlug ? 'underline' : ''
               }
               color={
-                category.slug === selectedCategory?.slug ? 'orange.700' : ''
+                category.slug === selectedCategorySlug ? 'orange.700' : ''
               }
               fontWeight={
-                category.slug === selectedCategory?.slug ? 'bold' : 'normal'
+                category.slug === selectedCategorySlug ? 'bold' : 'normal'
               }
               onClick={() => onSelectCategory(category)}
               fontSize={'lg'}
