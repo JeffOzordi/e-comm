@@ -6,7 +6,6 @@ import ThemeToggle from './ThemeToggle';
 import SearchInput from './SearchInput';
 
 interface Props {
-  // onSearch: (searchText: string) => void;
   onMenuClick: () => void;
 }
 
