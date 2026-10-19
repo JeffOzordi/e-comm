@@ -1,8 +1,7 @@
-
 import { useState } from 'react';
 import { Box, Heading, HStack, Image, Text } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
-import { Product } from '../hooks/useProducts';
+import { Product } from '../entities/Product';
 
 interface Props {
   product: Product;
@@ -11,10 +10,14 @@ interface Props {
 const ProductCard = ({ product }: Props) => {
   return (
     <Link to={'/products/' + product.id}>
-      <Box width="100%" maxWidth="300px" _hover={{
-        transform: 'scale(1.02)',
-        transition: 'all 0.2s ease-in-out'
-      }}>
+      <Box
+        width="100%"
+        maxWidth="300px"
+        _hover={{
+          transform: 'scale(1.02)',
+          transition: 'all 0.2s ease-in-out',
+        }}
+      >
         <Image
           height="300px"
           width="100%"

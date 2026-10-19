@@ -8,9 +8,7 @@ const Layout = () => {
   return (
     <>
       <NavBar onMenuClick={() => setCategoryMenuOpen(true)} />
-      <Box paddingX={5}>
-        <Outlet />
-      </Box>
+      <Outlet />
     </>
   );
 };

@@ -1,7 +1,6 @@
-import React from 'react';
-import useProducts, { Product } from './useProducts';
 import { useQuery } from '@tanstack/react-query';
 import APIClient from '../services/api-client';
+import { Product } from '../entities/Product';
 
 const apiClient = new APIClient<Product>('/products');
 
