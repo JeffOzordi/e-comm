@@ -28,18 +28,19 @@ const ProductCard = ({ product }: Props) => {
         />
 
         <Box paddingX={3} paddingY={1}>
+            <Heading fontSize="large">{product.title}</Heading>
           <HStack justifyContent="space-between">
             <Box
               paddingX="4px"
               paddingY="2px"
               border="1px solid"
-              borderRadius="4px"
+              borderRadius="12px"
               className="inline-block border-amber-700 text-amber-700"
             >
               {product.category}
             </Box>
 
-            <Box
+            {/* <Box
               paddingX="4.5px"
               paddingY="2.5px"
               borderRadius="4px"
@@ -47,14 +48,13 @@ const ProductCard = ({ product }: Props) => {
               className="inline-block bg-amber-700 text-black"
             >
               {product.rating}
-            </Box>
-          </HStack>
-
-          <Heading fontSize="large">{product.title}</Heading>
-
+            </Box> */}
           <Text fontWeight="medium" className="font-semibold">
             ${product.price}
           </Text>
+          </HStack>
+
+
         </Box>
       </Box>
     </Link>

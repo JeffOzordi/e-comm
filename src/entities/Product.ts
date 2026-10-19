@@ -7,4 +7,11 @@ export interface Product {
   category: string;
   description: string;
   images: string[];
+  tags: string[]
+  warrantyInformation: string
+  shippingInformation: string
+  availabilityStatus: string
+  stock: number,
+  returnPolicy: string
+  minimumOrderQuantity: number,
 }

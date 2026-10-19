@@ -4,7 +4,7 @@ import { Product } from '../entities/Product';
 
 const apiClient = new APIClient<Product>('/products');
 
-const useProduct = (id: number | string) =>
+const useProduct = (id: number) =>
   useQuery({
     queryKey: ['games', id],
     queryFn: () => apiClient.get(id),
