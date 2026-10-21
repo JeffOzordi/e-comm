@@ -62,7 +62,7 @@ const ProductDetailPage = () => {
     <Box className="min-h-screen bg-white text-black dark:bg-black dark:text-white">
       <Box className="mx-auto grid max-w-375 grid-cols-1 gap-6 p-4 sm:p-6 lg:grid-cols-2 lg:gap-8 lg:p-8">
         {/* LEFT: Product image carousel */}
-        <Box className="min-w-0">
+        <Box className="min-w-0  justify-items-center" >
           <Box className="group relative flex aspect-4/5 max-h-200 items-center justify-items-center overflow-hidden rounded-2xl bg-gray-100 dark:bg-gray-900 sm:rounded-3xl">
             {images.length > 0 ? (
               <Image

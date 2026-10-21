@@ -1,9 +1,9 @@
-
-import { Box } from '@chakra-ui/react';
+import { Box, Image } from '@chakra-ui/react';
 import { Menu } from 'lucide-react';
 import logo from '../assets/244396834_683283099297966_5993122135789503446_n.jpg';
 import ThemeToggle from './ThemeToggle';
 import SearchInput from './SearchInput';
+import { Link } from 'react-router-dom';
 
 interface Props {
   onMenuClick: () => void;
@@ -11,10 +11,7 @@ interface Props {
 
 const NavBar = ({ onMenuClick }: Props) => {
   return (
-    <Box
-      paddingX={2}
-      className="flex h-20 items-center gap-2"
-    >
+    <Box paddingX={2} className="flex h-20 items-center gap-2">
       <button
         type="button"
         aria-label="Open category menu"
@@ -24,12 +21,14 @@ const NavBar = ({ onMenuClick }: Props) => {
         <Menu size={24} />
       </button>
 
-      <img
-        src={logo}
-        alt="Store logo"
-        className="h-12 w-12 shrink-0 rounded-2xl"
-      />
-      <SearchInput/>
+      <Link to={'/'}>
+        <Image
+          src={logo}
+          alt="Store logo"
+          className="h-15 w-15 shrink-0 rounded-2xl"
+        />
+      </Link>
+      <SearchInput />
       <ThemeToggle />
     </Box>
   );
