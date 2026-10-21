@@ -7,8 +7,8 @@ import { useNavigate } from 'react-router-dom';
 const SearchInput = () => {
   const ref = useRef<HTMLInputElement>(null);
   const setSearchText = useProductQueryStore((s) => s.setSearchText);
-  const navigate = useNavigate()
-  
+  const navigate = useNavigate();
+
   return (
     <form
       className="w-full"
@@ -16,7 +16,7 @@ const SearchInput = () => {
         event.preventDefault();
 
         if (ref.current) {
-          navigate('/')
+          navigate('/');
           setSearchText(ref.current.value);
         }
       }}
